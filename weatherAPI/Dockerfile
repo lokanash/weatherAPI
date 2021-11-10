@@ -10,8 +10,8 @@ WORKDIR /weatherAPI
 COPY ["weatherAPI.csproj", "weatherAPI/"]
 RUN dotnet restore "weatherAPI/weatherAPI.csproj"
 COPY . .
-#WORKDIR "/src/weatherAPI"
-#RUN dotnet build "weatherAPI.csproj" -c Release -o /app/build
+WORKDIR "/src/weatherAPI"
+RUN dotnet build "weatherAPI.csproj" -c Release -o /app/build
 #
 #FROM build AS publish
 #RUN dotnet publish "weatherAPI.csproj" -c Release -o /app/publish
