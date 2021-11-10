@@ -54,6 +54,6 @@ jobs:
     
     - name: Push to Azure Container Registry
       run: |
-        docker build -f Weather.api/Dockerfile -t ${{env.CONTAINER_REGISTRY}}/${{ENV.CONTAINER_REPOSITORY}}:${{ github.sha }} .
+        docker build -f weatherAPI/Dockerfile -t ${{env.CONTAINER_REGISTRY}}/${{ENV.CONTAINER_REPOSITORY}}:${{ github.sha }} .
         docker push ${{env.CONTAINER_REGISTRY}}/${{env.CONTAINER_REPOSITORY}}:${{ github.sha }}
       working-directory: ./src
