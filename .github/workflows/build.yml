@@ -35,25 +35,25 @@ jobs:
    # - name: Test
    #   run: dotnet test --no-build --verbosity normal
 
-    - name: Build & push Docker image in docker container register
-      uses: mr-smithers-excellent/docker-build-push@v5  
-      with:
-       image: lokanash/weather-api
-       tags: v1, latest
-       registry: docker.io
-       dockerfile: weatherAPI/Dockerfile
-       username: ${{ secrets.DOCKER_USERNAME }}
-       password: ${{ secrets.DOCKER_PASSWORD }}
-
-    # - name: login to Azure Container Registry
-    #   uses: azure/docker-login@v1
+    # - name: Build & push Docker image in docker container register
+    #   uses: mr-smithers-excellent/docker-build-push@v5  
     #   with:
-    #     login-server: ${{env.CONTAINER_REGISTRY}}
-    #     username: 'crcoredevnortheu002'
-    #     password: 'FqNTclmSWiWUDjKYyTFKhCbjY8/3xeAe'
-        
-    # - name: Push to Azure Container Registry
-    #   run: |
-    #     docker build -f Weather.api/Dockerfile -t ${{env.CONTAINER_REGISTRY}}/${{ENV.CONTAINER_REPOSITORY}}:${{ github.sha }} .
-    #     docker push ${{env.CONTAINER_REGISTRY}}/${{env.CONTAINER_REPOSITORY}}:${{ github.sha }}
-    #   working-directory: ./src
+    #    image: lokanash/weather-api
+    #    tags: v1, latest
+    #    registry: docker.io
+    #    dockerfile: weatherAPI/Dockerfile
+    #    username: ${{ secrets.DOCKER_USERNAME }}
+    #    password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: login to Azure Container Registry
+      uses: azure/docker-login@v1
+      with:
+        login-server: ${{env.CONTAINER_REGISTRY}}
+        username: 'crcoredevnortheu002'
+        password: 'FqNTclmSWiWUDjKYyTFKhCbjY8/3xeAe'
+    
+    - name: Push to Azure Container Registry
+      run: |
+        docker build -f Weather.api/Dockerfile -t ${{env.CONTAINER_REGISTRY}}/${{ENV.CONTAINER_REPOSITORY}}:${{ github.sha }} .
+        docker push ${{env.CONTAINER_REGISTRY}}/${{env.CONTAINER_REPOSITORY}}:${{ github.sha }}
+      working-directory: ./src
