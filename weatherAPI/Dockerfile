@@ -7,8 +7,8 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /weatherAPI
-COPY ["weatherAPI.csproj", "weatherAPI/"]
-RUN dotnet restore "weatherAPI/weatherAPI.csproj"
+COPY ["weatherAPI.csproj", "weatherAPI_build/"]
+RUN dotnet restore "weatherAPI_build/weatherAPI.csproj"
 COPY . .
 #WORKDIR "weatherAPI/"
 #WORKDIR "/weatherAPI"
