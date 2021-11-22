@@ -57,3 +57,5 @@ jobs:
         docker build -f Dockerfile -t ${{env.CONTAINER_REGISTRY}}/${{ENV.CONTAINER_REPOSITORY}}:${{ github.sha }} .
         docker push ${{env.CONTAINER_REGISTRY}}/${{env.CONTAINER_REPOSITORY}}:${{ github.sha }}
       working-directory: ./weatherAPI
+
+    - task: PublishBuildArtifacts@1
